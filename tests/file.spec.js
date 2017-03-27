@@ -1,10 +1,13 @@
 var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 //Required pages & util
 var loginPage = require('../pages/login.po');
 var filePage = require('../pages/file/file.po');
 var utils = require('../utils/utils');
+var file = require('../utils/file.crudl');
 
 describe('Files E2E', function() {
   before('login to the portal app', function() {
@@ -13,6 +16,7 @@ describe('Files E2E', function() {
     utils.waitNotPresent(progress);
     loginPage.commands.login("trever", "123");
     utils.waitNotPresent(loginPage.selectors.logoutButton);
+    browser.sleep(1000);
   });
 
   beforeEach('navigate to files', function() {
@@ -53,8 +57,10 @@ describe('Files E2E', function() {
   //Read
   describe('READ', function() {
     //TODO: Create Test file here
+    file.create();
 
     xit('should display the file details once selected [PORTAL]', function() {
+      browser.sleep(10000);
       expect(filePage.selectors.emptyContent.isPresent()).eventually.to.be.true;
       var file = filePage.commands.getFile(0);
       file.click();
