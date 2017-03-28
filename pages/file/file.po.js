@@ -1,5 +1,5 @@
 var FilesPage = function() {
-  var selectors = {
+  var locators = {
     filesMenuButton: element(by.css("button[aria-label*=Files]")),
     header: element(by.xpath("//h3/span[text()='Files']")),
     emptyContent: element(by.css(".empty-state")),
@@ -14,25 +14,22 @@ var FilesPage = function() {
   };
 
   var commands = {
-    navigateToFiles: function() {
-      selectors.filesMenuButton.click();
-    },
     getFile: function(index) {
-      return selectors.fileList.get(index);
+      return locators.fileList.get(index);
     },
     getFileDetail: function() {
       var fileDetail = {};
 
-      fileDetail.name = selectors.fileDetail.detailVal.get(0);
-      fileDetail.uid = selectors.fileDetail.detailVal.get(1);
-      fileDetail.owner = selectors.fileDetail.detailVal.get(2);
-      fileDetail.preview = selectors.fileDetail.detailVal.get(3).element(by.css('img'));
+      fileDetail.name = locators.fileDetail.detailVal.get(0);
+      fileDetail.uid = locators.fileDetail.detailVal.get(1);
+      fileDetail.owner = locators.fileDetail.detailVal.get(2);
+      fileDetail.preview = locators.fileDetail.detailVal.get(3).element(by.css('img'));
 
       return fileDetail;
     }
   };
 
-  return {selectors, commands};
+  return {locators, commands};
 };
 
 module.exports = new FilesPage();

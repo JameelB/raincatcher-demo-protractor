@@ -91,14 +91,17 @@ module.exports.checkListSize = function(locators, expectedSize) {
   expect(locators.count()).eventually.to.equal(expectedSize);
 };
 
-module.exports.navigateToPage = function(selector) {
+/**
+ *
+ * @param locator - locator within the menu that is used to navigate to
+ */
+module.exports.navigateToSection = function(locator) {
   var menu = element(by.css("[aria-label*=Menu]"));
-  menu.isDisplayed().then(function (isDisplayed) {
+  menu.isDisplayed().then(function(isDisplayed) {
     if (isDisplayed) {
       menu.click();
     }
 
-    selector.click();
-    browser.sleep(1000);
+    locator.click();
   });
 };
