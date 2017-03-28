@@ -27,3 +27,15 @@ module.exports.waitClickable = function(selector) {
   var EC = protractor.ExpectedConditions;
   browser.wait(EC.elementToBeClickable(elm), 30000);
 };
+
+module.exports.navigateToPage = function(selector) {
+  var menu = element(by.css("[aria-label*=Menu]"));
+  menu.isDisplayed().then(function(isDisplayed) {
+    if (isDisplayed) {
+      menu.click();
+    }
+
+    selector.click();
+    browser.sleep(1000);
+  });
+};
