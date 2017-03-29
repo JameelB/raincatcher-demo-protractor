@@ -3,7 +3,6 @@ var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
-//Required pages & util
 var loginPage = require('../pages/login.po');
 var filePage = require('../pages/file/file.po');
 var utils = require('../utils/utils');
@@ -28,22 +27,21 @@ describe('Files E2E', function() {
     });
   });
 
-  //Create - Mobile only
-  describe('CREATE', function() {
-    xit('should be able to click on the create button', function() {
+  describe.skip('CREATE', function() {
+    //TODO
+    it('should be able to click on the create button', function() {
     });
 
-    xit('should be able to create a new file', function() {
+    it('should be able to create a new file', function() {
     });
 
-    xit('should add and display the newly created file in the list', function() {
+    it('should add and display the newly created file in the list', function() {
     });
 
-    xit('should be able to select and display the file details of the newly created file', function() {
+    it('should be able to select and display the file details of the newly created file', function() {
     });
   });
 
-  // List
   describe('LIST', function() {
 
     var fileListContainer = filePage.locators.fileListContainer;
@@ -61,7 +59,6 @@ describe('Files E2E', function() {
     });
   });
 
-  //Read
   describe('READ', function() {
     it('should display the file details once selected [PORTAL]', function() {
       expect(filePage.locators.emptyContent.isPresent()).eventually.to.be.true;
@@ -79,7 +76,25 @@ describe('Files E2E', function() {
     });
   });
 
-  //Search
+  describe('CANCEL', function() {
+    it('should exit the file details when the close button is clicked', function() {
+      utils.navigateToSection(filePage.locators.filesMenuButton);
+      filePage.commands.getFile(0).click();
+      expect(filePage.locators.fileDetail.container.isPresent()).eventually.to.be.true;
+
+      filePage.commands.closeFileDetail();
+      expect(filePage.locators.fileDetail.container.isPresent()).eventually.to.be.false;
+    });
+
+    xit('should be able to cancel a file create operation', function() {
+      //TODO
+    });
+
+    xit('should not have added a new file to the list when file creation is cancelled', function() {
+      //TODO
+    });
+  });
+
   describe('SEARCH', function() {
     var fileListContainer = filePage.locators.fileListContainer;
 
@@ -105,4 +120,5 @@ describe('Files E2E', function() {
       expect(filePage.locators.searchBar.clear());
     });
   });
+
 });

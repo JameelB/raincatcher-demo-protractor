@@ -7,6 +7,7 @@ var FilesPage = function() {
     fileListContainer: element(by.css(".wfm-file-list")),
     fileList: $$('[ng-repeat*=file]'),
     fileDetail: {
+      closeButton: element(by.css("[aria-label*=Close")),
       container: element(by.css('file-detail')),
       title: element(by.css('.content-toolbar')).element(by.css('h3')),
       detailVal: $$('file-detail > div > md-list > md-list-item > .md-list-item-text > h3')
@@ -26,6 +27,9 @@ var FilesPage = function() {
       fileDetail.preview = locators.fileDetail.detailVal.get(3).element(by.css('img'));
 
       return fileDetail;
+    },
+    closeFileDetail: function() {
+      return locators.fileDetail.closeButton.click();
     }
   };
 
